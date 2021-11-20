@@ -1,34 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// import openzeppelin library to access the ERC20 interface
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-
-//import IERC20
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
-// import the uniswap router
-interface IUniswapV2Router02 {
-    function swapExactTokensForTokens(
-        //amount of tokens we are sending in
-        uint256 amountIn,
-        //the minimum amount of tokens we want out of the trade
-        uint256 amountOutMin,
-        //list of token addresses we are going to trade in.  this is necessary to calculate amounts
-        address[] calldata path,
-        //this is the address we are going to send the output tokens to
-        address to,
-        //the last time that the trade is valid for
-        uint256 deadline
-    ) external returns (uint256[] memory amounts);
-}
+import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 
 // OCC smart contract
 contract DonationsCollector {
     address public owner;
     uint256 public balance;
-    //bool public outstandingDonation;
-    //uint256 public donationAmount;
 
     event TransferReceived(address _from, uint256 _amount);
     event TransferSent(address _from, address _destAddr, uint256 _amount);
@@ -46,12 +25,12 @@ contract DonationsCollector {
     // function that swap tokens from our smart contract
     // address of the sushiswap router: 0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506
     // address of the uniswap v2 router: 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
-    address private constant UNISWAP_V2_ROUTER =
-        0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
+    address private constant SUSHISWAP_ROUTER =
+        0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506;
     //address of WETH token
     address private constant WETH = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
     address private constant LINK = 0xa36085F69e2889c224210F603D836748e7dC0088;
-    address private constant USDC = 0xb7a4F3E9097C08dA09517b5aB877F7a917224ede;
+    address private constant DAI = 0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa;
 
     // swap function that trade one one token to another
     function swap(
@@ -63,7 +42,7 @@ contract DonationsCollector {
     ) external {
         // allow the uniswapv2 router to spend the token we just sent to this contract calling IERC20 approve
         require(
-            IERC20(_tokenIn).approve(UNISWAP_V2_ROUTER, _amountIn),
+            IERC20(_tokenIn).approve(SUSHISWAP_ROUTER, _amountIn),
             "approve failed."
         );
 
@@ -76,7 +55,7 @@ contract DonationsCollector {
         path[1] = WETH;
         path[2] = _tokenOut;
 
-        IUniswapV2Router02(UNISWAP_V2_ROUTER).swapExactTokensForTokens(
+        IUniswapV2Router02(SUSHISWAP_ROUTER).swapExactTokensForTokens(
             _amountIn,
             _amountOutMin,
             path,
