@@ -1,13 +1,20 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.7.0;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+//import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+//import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0-solc-0.7/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts@3.4.2/token/ERC20/IERC20.sol";
+//import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 
 // OCC smart contract
 contract DonationsCollector {
     address public owner;
     uint256 public balance;
+
+    // define variables to interact with keepers
+    bool public DonationStorage;
+    uint256 public DonationOut;
 
     event TransferReceived(address _from, uint256 _amount);
     event TransferSent(address _from, address _destAddr, uint256 _amount);
@@ -62,6 +69,9 @@ contract DonationsCollector {
             _to,
             block.timestamp
         );
+
+        DonationStorage = true;
+        DonationOut = IERC20(_tokenOut).balanceOf(address(this));
     }
 
     // function that transfer/donate tokens to charity
