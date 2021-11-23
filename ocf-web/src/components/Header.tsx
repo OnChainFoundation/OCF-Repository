@@ -1,7 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useMoralis } from 'react-moralis'
 
 const Header = function (): JSX.Element {
+  const { authenticate, isAuthenticated, user } = useMoralis()
+
+  const renderMetaButton = (): JSX.Element => {
+    if (!isAuthenticated) {
+      return (
+        <div>
+          <button
+            className="btn btn-outline-primary"
+            type="button"
+            onClick={() => authenticate()}
+          >
+            Authenticate
+          </button>
+        </div>
+      )
+    }
+
+    return (
+      <div>
+        <button className="btn btn-primary" type="button">
+          {user?.get('username')}
+        </button>
+      </div>
+    )
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid mx-5">
@@ -37,9 +64,7 @@ const Header = function (): JSX.Element {
               </Link>
             </li>
           </ul>
-          <button className="btn btn-outline-primary" type="button">
-            Connect
-          </button>
+          {renderMetaButton()}
         </div>
       </div>
     </nav>
