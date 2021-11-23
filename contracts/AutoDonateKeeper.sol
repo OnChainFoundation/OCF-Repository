@@ -5,7 +5,7 @@ import "./DonationCollector.sol";
 // import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@chainlink/contracts/src/v0.7/KeeperCompatible.sol";
 
-contract autoDonate is KeeperCompatibleInterface, OCFDonation {
+contract autoDonate is KeeperCompatibleInterface, DonationCollector {
     uint256 public immutable interval;
     uint256 public lastTimeStamp;
 
