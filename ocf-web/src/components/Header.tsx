@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { useMoralis } from 'react-moralis'
 
 const Header = function (): JSX.Element {
-  const { authenticate, isAuthenticated, user } = useMoralis()
+  const { authenticate, logout, isAuthenticated, user } = useMoralis()
+
+  const { enableWeb3, isWeb3Enabled } = useMoralis()
 
   const renderMetaButton = (): JSX.Element => {
     if (!isAuthenticated) {
@@ -12,7 +14,12 @@ const Header = function (): JSX.Element {
           <button
             className="btn btn-outline-primary"
             type="button"
-            onClick={() => authenticate()}
+            onClick={() => {
+              authenticate()
+              if (!isWeb3Enabled) {
+                enableWeb3()
+              }
+            }}
           >
             Authenticate
           </button>
@@ -22,8 +29,12 @@ const Header = function (): JSX.Element {
 
     return (
       <div>
-        <button className="btn btn-primary" type="button">
-          {user?.get('username')}
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => logout()}
+        >
+          {user?.get('ethAddress')}
         </button>
       </div>
     )

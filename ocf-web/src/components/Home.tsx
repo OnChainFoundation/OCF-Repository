@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../styles/App.css'
 // import Select from 'react-select'
 
@@ -35,19 +36,19 @@ const Home = function (): JSX.Element {
           </h4>
         </div>
       </div>
-      {/* <div>
-        <Select placeholder="Filter.../" options={charities} />
-      </div> */}
       <div className="container">
         <div className="main-content">
           <div className="row mt-3">
             {charities.map((item) => {
               return (
                 <div className="col-sm-6 col-lg-4">
-                  <div className="card">
+                  <Link
+                    to={`/donate/${item.value}`}
+                    className="card text-decoration-none text-body"
+                  >
                     <div className="card-header">{item.label}</div>
                     <div className="card-body">{item.description}</div>
-                  </div>
+                  </Link>
                 </div>
               )
             })}

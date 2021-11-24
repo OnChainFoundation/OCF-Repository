@@ -14,7 +14,9 @@ const App = function (): JSX.Element {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/donate" element={<Donate />} />
+          <Route path="/donate" element={<Donate />}>
+            <Route path=":charityId" element={<Donate />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
