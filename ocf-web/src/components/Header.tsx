@@ -43,9 +43,9 @@ const Header = function (): JSX.Element {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid mx-5">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           OnChain Foundations
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

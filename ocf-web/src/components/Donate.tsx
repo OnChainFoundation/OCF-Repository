@@ -93,6 +93,7 @@ const Donate = function (): JSX.Element {
                   className="mb-3"
                   options={options}
                   onChange={(selectedOption) => setCharity(selectedOption)}
+                  value={charity}
                 />
                 <DonateEth
                   eth={parseInt(eth, 10) || 0}

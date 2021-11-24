@@ -8,7 +8,7 @@ import Donate from './components/Donate'
 
 const App = function (): JSX.Element {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/OCF-Repository">
       <div>
         <Header />
         <Routes>
