@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useMoralis } from 'react-moralis'
+import logo from '../assets/images/OnChainFoundationLOGO1.png'
 
 const Header = function (): JSX.Element {
   const { authenticate, logout, isAuthenticated, user } = useMoralis()
@@ -44,7 +45,7 @@ const Header = function (): JSX.Element {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid mx-5">
         <Link className="navbar-brand" to="/">
-          OnChain Foundations
+          <img src={logo} height="50" width="135" alt="logo" />
         </Link>
         <button
           className="navbar-toggler"
@@ -64,11 +65,11 @@ const Header = function (): JSX.Element {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/about">
                 About
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link" to="/donate">
                 Donate

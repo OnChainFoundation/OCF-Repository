@@ -1,27 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/App.css'
-// import Select from 'react-select'
-
-const ipsum =
-  // eslint-disable-next-line max-len
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+import {
+  cleanWaterDescription,
+  codePlusDescription,
+  furryFriendsDescription,
+} from '../assets/text/descriptions'
+import cleanWaterLogo from '../assets/images/CleanWater.png'
+import codePlusLogo from '../assets/images/CodePlus.png'
+import furryFriendsLogo from '../assets/images/FurryFriends.png'
 
 const charities = [
   {
     value: 1,
-    label: 'Tree Charity',
-    description: ipsum,
+    label: 'Clean Water',
+    description: cleanWaterDescription,
+    src: cleanWaterLogo,
   },
   {
     value: 2,
-    label: 'Ocean Charity',
-    description: ipsum,
+    label: 'Code Plus',
+    description: codePlusDescription,
+    src: codePlusLogo,
   },
   {
     value: 3,
-    label: 'Dog Charity',
-    description: ipsum,
+    label: 'Furry Friends',
+    description: furryFriendsDescription,
+    src: furryFriendsLogo,
   },
 ]
 
@@ -30,7 +36,7 @@ const Home = function (): JSX.Element {
     <main>
       <div className="banner-primary">
         <div className="main-content">
-          <h1>OnChain Foundations</h1>
+          <h1>On-Chain Foundation</h1>
           <h4>
             Connecting donors and charities through the power of blockchain
           </h4>
@@ -41,13 +47,26 @@ const Home = function (): JSX.Element {
           <div className="row mt-3">
             {charities.map((item) => {
               return (
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-4 mb-3">
                   <Link
                     to={`/donate/${item.value}`}
                     className="card text-decoration-none text-body"
                   >
-                    <div className="card-header">{item.label}</div>
-                    <div className="card-body">{item.description}</div>
+                    <div className="row g-0">
+                      <div className="col-md-4">
+                        <img
+                          src={item.src}
+                          className="img-fluid rounded-start"
+                          alt={`${item.label} Logo`}
+                        />
+                      </div>
+                      <div className="col-md-8">
+                        <div className="card-body">
+                          <h5 className="card-title">{item.label}</h5>
+                          <p className="card-text">{item.description}</p>
+                        </div>
+                      </div>
+                    </div>
                   </Link>
                 </div>
               )
