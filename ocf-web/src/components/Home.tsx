@@ -47,7 +47,7 @@ const Home = function (): JSX.Element {
           <div className="row mt-3">
             {charities.map((item) => {
               return (
-                <div className="col-sm-6 col-lg-4 mb-3">
+                <div className="col-sm-6 col-lg-4 mb-3" key={item.label}>
                   <Link
                     to={`/donate/${item.value}`}
                     className="card text-decoration-none text-body"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useMoralis } from 'react-moralis'
 import logo from '../assets/images/OnChainFoundationLOGO1.png'
 
@@ -61,19 +61,14 @@ const Header = function (): JSX.Element {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
+              <NavLink className="fs-5 nav-link" to="/">
                 Home
-              </Link>
+              </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link" to="/about">
-                About
-              </Link>
-            </li> */}
             <li className="nav-item">
-              <Link className="nav-link" to="/donate">
+              <NavLink className="fs-5 nav-link" to="/donate">
                 Donate
-              </Link>
+              </NavLink>
             </li>
           </ul>
           {renderMetaButton()}
