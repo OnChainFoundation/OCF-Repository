@@ -1,0 +1,16 @@
+.banner-primary {
+  padding: 3rem;
+  font-size: 1.3em;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(10deg, #026693 0%, #013046 100%);
+  background-size: cover;
+  color: #fff;
+  text-align: left;
+}
+
+.main-content {
+  max-width: 114.286rem;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
