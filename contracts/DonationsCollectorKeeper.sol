@@ -1,4 +1,11 @@
+/**
+ *Submitted for verification at Etherscan.io on 2021-11-27
+*/
+
 // SPDX-License-Identifier: MIT
+// File: contracts/On-Chain Charities/DonationsCollectorKeeper.sol
+
+
 // File: @uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol
 
 pragma solidity >=0.6.2;
@@ -269,13 +276,14 @@ contract DonationsCollectorKeeper {
     address private constant LINK = 0xa36085F69e2889c224210F603D836748e7dC0088;
     address private constant DAI = 0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa;
     
-    function swap(address _tokenIn, address _tokenOut, uint256 _amountIn, uint256 _amountOutMin, address _to) external {
+    function swap(address _tokenIn, address _tokenOut, uint256 _amountIn, uint256 _amountOutMin, address _to) payable external {
+        balance += msg.value;
         require(IERC20(_tokenIn).approve(SUSHISWAP_ROUTER, _amountIn), 'approve failed.');
         address[] memory path;
-            path = new address[](3);
-            path[0] = _tokenIn;
-            path[1] = WETH;
-            path[2] = _tokenOut;
+        path = new address[](3);
+        path[0] = _tokenIn;
+        path[1] = WETH;
+        path[2] = _tokenOut;
         
         IUniswapV2Router02(SUSHISWAP_ROUTER).swapExactTokensForTokens(_amountIn, _amountOutMin, path, _to, block.timestamp);
         
